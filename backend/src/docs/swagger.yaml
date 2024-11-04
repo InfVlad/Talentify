@@ -1,0 +1,1139 @@
+openapi: 3.0.0
+paths:
+  /api/auth/signup:
+    post:
+      summary: User signup
+      description: Register a new user
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignupRequest"
+      responses:
+        "201":
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignupResponse"
+        "400":
+          description: Bad request, validation error
+        "500":
+          description: Internal server error
+  /api/auth/login:
+    post:
+      summary: User login
+      description: Login with email and password
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: User logged in successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+        "400":
+          description: Invalid credentials
+        "500":
+          description: Internal server error
+  /api/users:
+    get:
+      summary: Get all users
+      description: Returns a list of all users
+      tags:
+        - Users
+      responses:
+        "200":
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Users"
+        "500":
+          description: Internal server error
+    post:
+      summary: Create a new user
+      description: Creates a new user in the system
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users"
+      responses:
+        "201":
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        "409":
+          description: Email already exists
+        "500":
+          description: Internal server error
+  /api/users/{id}:
+    get:
+      summary: Get user by ID
+      description: Returns a single user by ID
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        "404":
+          description: User not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update user by ID
+      description: Updates an existing user by ID
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Users"
+      responses:
+        "200":
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        "404":
+          description: User not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete user by ID
+      description: Deletes an existing user by ID
+      tags:
+        - Users
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: User deleted successfully
+        "404":
+          description: User not found
+        "500":
+          description: Internal server error
+  /api/company:
+    get:
+      summary: Get all companies
+      description: Returns a list of all companies
+      tags:
+        - Company
+      responses:
+        "200":
+          description: A list of companies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Company"
+        "500":
+          description: Internal server error
+    post:
+      summary: Create a new company
+      description: Creates a new company in the system
+      tags:
+        - Company
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Company"
+      responses:
+        "201":
+          description: Company created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+        "409":
+          description: Company already exists
+        "500":
+          description: Internal server error
+  /api/company/{id}:
+    get:
+      summary: Get company by ID
+      description: Returns a single company by ID
+      tags:
+        - Company
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Company found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+        "404":
+          description: Company not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update company by ID
+      description: Updates an existing company by ID
+      tags:
+        - Company
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Company"
+      responses:
+        "200":
+          description: Company updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+        "404":
+          description: Company not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete company by ID
+      description: Deletes an existing company by ID
+      tags:
+        - Company
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Company deleted successfully
+        "404":
+          description: Company not found
+        "500":
+          description: Internal server error
+  /api/offers/:
+    get:
+      summary: Get all offers
+      description: Returns a list of all offers
+      tags:
+        - Offers
+      responses:
+        "200":
+          description: A list of offers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Offers"
+        "500":
+          description: Internal server error
+    post:
+      summary: Create a new offer
+      description: Creates a new offer in the system
+      tags:
+        - Offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Offers"
+      responses:
+        "201":
+          description: Offer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Offers"
+        "409":
+          description: Offer already exists
+        "500":
+          description: Internal server error
+  /api/offers/{id}:
+    get:
+      summary: Get offer by ID
+      description: Returns an offer by ID
+      tags:
+        - Offers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Offer found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Offers"
+        "404":
+          description: Offer not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update an offer
+      description: Updates an offer in the system
+      tags:
+        - Offers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Offer updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Offers"
+        "404":
+          description: Offer not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete an offer
+      description: Delete an offer in the system
+      tags:
+        - Offers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Offer deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Offers"
+        "404":
+          description: Offer not found
+        "500":
+          description: Internal server error
+  /api/profiles:
+    get:
+      summary: Get all profiles
+      description: Get all profiles in the system
+      tags:
+        - Profiles
+      responses:
+        "200":
+          description: A list of profiles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Profiles"
+        "500":
+          description: Internal server error
+    post:
+      summary: Create a new profile
+      description: Create a new profile in the system
+      tags:
+        - Profiles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Profiles"
+      responses:
+        "201":
+          description: Profile created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profiles"
+        "409":
+          description: Profile already exists
+        "500":
+          description: Internal server error
+  /api/profiles/{id}:
+    get:
+      summary: Get a profile by ID
+      description: Get a single profile by id
+      tags:
+        - Profiles
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Profile founded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profiles"
+        "404":
+          description: Profile not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update a profile by ID
+      description: Update a single profile by id
+      tags:
+        - Profiles
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profiles"
+        "404":
+          description: Profile not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete a profile by ID
+      description: Delete a single profile by id
+      tags:
+        - Profiles
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Profile deleted
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Profiles"
+        "404":
+          description: Profile not found
+        "500":
+          description: Internal server error
+  /api/experience:
+    get:
+      summary: Get all experiences
+      description: Get all experiences
+      tags:
+        - Experience
+      responses:
+        "200":
+          description: List of all experiences
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Experience"
+        "500":
+          description: Internal server error
+    post:
+      summary: Create a new experience
+      description: Create a new experience
+      tags:
+        - Experience
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Experience"
+      responses:
+        "201":
+          description: Experience created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Experience"
+        "409":
+          description: Experience already exists
+        "500":
+          description: Internal server error
+  /api/experience/{id}:
+    get:
+      summary: Get an experience by id
+      description: Get a single experience
+      tags:
+        - Experience
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Experience founded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Experience"
+        "404":
+          description: Experience not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update a experience by ID
+      description: Update a single experience by id
+      tags:
+        - Experience
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Experience updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Experience"
+        "404":
+          description: Experience not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete a experience by ID
+      description: Delete a single experience by id
+      tags:
+        - Experience
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Experience deleted
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Experience"
+        "404":
+          description: Experience not found
+        "500":
+          description: Internal server error
+  /api/applications:
+    get:
+      summary: Get all applications
+      description: Get all applications
+      tags:
+        - Applications
+      responses:
+        "200":
+          description: List of all applications
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Application"
+        "500":
+          description: Internal server error
+    post:
+      summary: Create a new application
+      description: Create a new application
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Application"
+      responses:
+        "201":
+          description: Experience created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "409":
+          description: Application already exists
+        "500":
+          description: Internal server error
+  /api/applications/{id}:
+    get:
+      summary: Get an application by id
+      description: Get a single application
+      tags:
+        - Applications
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Application founded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "404":
+          description: Application not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update a application by ID
+      description: Update a single application by id
+      tags:
+        - Applications
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Application updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "404":
+          description: Application not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete a application by ID
+      description: Delete a single application by id
+      tags:
+        - Applications
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Application deleted
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Application"
+        "404":
+          description: Application not found
+        "500":
+          description: Internal server error
+  /api/favorites:
+    get:
+      summary: Get all favorites
+      description: Get all favorites
+      tags:
+        - Favorites
+      responses:
+        "200":
+          description: Favorites retrieved successfully
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Favorites"
+        "500":
+          description: Internal server error
+    post:
+      summary: Add a favorite
+      description: Add a favorite
+      tags:
+        - Favorites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Favorites"
+      responses:
+        "201":
+          description: Favorite created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Favorites"
+        "409":
+          description: Favorite already exists
+        "500":
+          description: Internal server error
+  /api/favorites/{id}:
+    get:
+      summary: Get a favorite by id
+      description: Get a favorite by id
+      tags:
+        - Favorites
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Favorite founded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Favorites"
+        "404":
+          description: Favorite not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update a favorite
+      description: Update a favorite
+      tags:
+        - Favorites
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Favorite updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Favorites"
+        "404":
+          description: Favorite not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete a favorite by ID
+      description: Delete a single favorite by id
+      tags:
+        - Favorites
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Favorite deleted
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Favorites"
+        "404":
+          description: Favorite not found
+        "500":
+          description: Internal server error
+  /api/studies:
+    get:
+      summary: Get all studies
+      description: Get all studies
+      tags:
+        - Studies
+      responses:
+        "200":
+          description: Studies retrieved successfully
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Studies"
+        "500":
+          description: Internal server error
+    post:
+      summary: Add a study
+      description: Add a study
+      tags:
+        - Studies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Studies"
+      responses:
+        "201":
+          description: Study created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Studies"
+        "409":
+          description: Study already exists
+        "500":
+          description: Internal server error
+  /api/studies/{id}:
+    get:
+      summary: Get a study by id
+      description: Get a study by id
+      tags:
+        - Studies
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Study founded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Studies"
+        "404":
+          description: Study not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update a study
+      description: Update a study
+      tags:
+        - Studies
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Study updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Studies"
+        "404":
+          description: Study not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete a study by ID
+      description: Delete a single study by id
+      tags:
+        - Studies
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Study deleted
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Studies"
+        "404":
+          description: Study not found
+        "500":
+          description: Internal server error
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    SignupRequest:
+      type: object
+      required:
+        - fullName
+        - email
+        - password
+      properties:
+        fullName:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: johndoe@example.com
+        password:
+          type: string
+          example: strongPassword123
+    SignupResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        fullName:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: johndoe@example.com
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-10-20T14:30:00Z"
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: johndoe@example.com
+        password:
+          type: string
+          example: strongPassword123
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        expiresIn:
+          type: integer
+          example: 3600
+    Users:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        fullName:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: johndoe@example.com
+        password:
+          type: string
+          example: secretPassword
+        role:
+          type: string
+          enum: [USER, RECRUITER, ADMIN]
+        companyId:
+          type: integer
+          example: 2
+        profile:
+          $ref: "#/components/schemas/Profile"
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Tech Corp"
+        address:
+          type: string
+          example: "123 Tech Street"
+        country:
+          type: string
+          example: "USA"
+        category:
+          type: string
+          example: "Technology"
+        email:
+          type: string
+          example: "info@techcorp.com"
+        website:
+          type: string
+          example: "https://techcorp.com"
+        imageUrl:
+          type: string
+          example: "https://techcorp.com/logo.png"
+    Profile:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        userId:
+          type: integer
+          example: 1
+        about:
+          type: string
+          example: "Software Engineer with 5 years of experience..."
+        address:
+          type: string
+          example: "123 Main St"
+        phone:
+          type: string
+          example: "555-555-5555"
+        resume:
+          type: string
+          example: "https://myresume.com"
+        experiences:
+          type: array
+          items:
+            $ref: "#/components/schemas/Experience"
+        studies:
+          type: array
+          items:
+            $ref: "#/components/schemas/Studies"
+    Experience:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        profileId:
+          type: integer
+          example: 1
+        company_name:
+          type: string
+          example: "Tech Company"
+        position:
+          type: string
+          example: "Software Engineer"
+        start_date:
+          type: string
+          format: date
+          example: "2022-01-01"
+        end_date:
+          type: string
+          format: date
+          example: "2023-01-01"
+    Offers:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "Senior Developer"
+        description:
+          type: string
+          example: "We are looking for a Senior Developer with 5+ years of experience..."
+        ownerId:
+          type: integer
+          example: 1
+        salary:
+          type: string
+          example: "$120,000/year"
+        requirements:
+          type: string
+          example: "Experience with Node.js, React, and SQL databases..."
+        location:
+          type: string
+          example: "Remote"
+        modality:
+          type: string
+          example: "Full-time"
+        status:
+          type: string
+          enum: [OPEN, CLOSED]
+        creationDate:
+          type: string
+          format: date-time
+          example: "2023-01-15T14:30:00Z"
+    Studies:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        profileId:
+          type: integer
+        institution_name:
+          type: string
+        degree:
+          type: string
+        graduation_date:
+          type: string
+          format: date
+          example: "2019-01-15T14:30:00Z"
+    Application:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        userId:
+          type: integer
+          example: 1
+        offerId:
+          type: integer
+          example: 3
+        status:
+          type: string
+          enum: [APPLIED, REVIEWED, INTERVIEW, OFFER, REJECTED]
+    Favorites:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        userId:
+          type: integer
+          example: 1
+        offerId:
+          type: integer
+          example: 2
+        createdAt:
+          type: string
+          format: date-time
+          example: "2022-01-01T14:30:00Z"
